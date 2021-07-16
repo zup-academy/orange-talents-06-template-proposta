@@ -16,8 +16,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.zup.proposta.proposta.dto.PropostaDTO;
+import br.com.zup.proposta.proposta.interfaces.SolicitacaoClient;
+import br.com.zup.proposta.proposta.model.DadosAnalise;
+import br.com.zup.proposta.proposta.model.DadosSolicitacao;
 import br.com.zup.proposta.proposta.model.Proposta;
+import br.com.zup.proposta.proposta.model.enums.StatusProposta;
 import br.com.zup.proposta.proposta.repository.PropostaRepository;
+import feign.FeignException;
 
 @RestController
 @RequestMapping(value = "/proposta")
@@ -26,14 +31,17 @@ public class PropostaController {
 	private final Logger logger = LoggerFactory.getLogger(Proposta.class);
 
 	private final PropostaRepository propostaRepository;
-
-	public PropostaController(PropostaRepository propostaRepository) {
+	
+	private final SolicitacaoClient solicitacaoClient;
+	
+	public PropostaController(PropostaRepository propostaRepository, SolicitacaoClient solicitacaoClient) {
 		super();
 		this.propostaRepository = propostaRepository;
+		this.solicitacaoClient = solicitacaoClient;
 	}
 
 	@PostMapping
-	public ResponseEntity<Proposta> inserir(@RequestBody @Valid PropostaDTO dto, UriComponentsBuilder builder) {
+	public ResponseEntity<?> inserir(@RequestBody @Valid PropostaDTO dto, UriComponentsBuilder builder) {
 		Proposta proposta = dto.toModel();
 
 		if (verificarDocumento(dto.getDocumento())) {
@@ -42,6 +50,15 @@ public class PropostaController {
 		}
 
 		propostaRepository.save(proposta);
+		
+		try {
+			DadosSolicitacao dadosSolicitacao = new DadosSolicitacao(proposta.getDocumento(), proposta.getNome(), proposta.getId());
+			DadosAnalise dadosAnalise = solicitacaoClient.dadosAnalise(dadosSolicitacao);
+			proposta.atualizarStatusProposta(StatusProposta.ELEGIVEL);			
+		} catch (FeignException fe) {
+			proposta.atualizarStatusProposta(StatusProposta.NAO_ELEGIVEL);
+		}
+		
 		logger.info("Cadastrada com sucesso a proposta com o CPF/CNPJ={}", proposta.getDocumento());
 		URI uri = builder.path("/proposta/{id}").build(proposta.getId());
 		return ResponseEntity.created(uri).build();
