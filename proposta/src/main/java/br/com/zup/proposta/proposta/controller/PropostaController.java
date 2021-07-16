@@ -1,9 +1,10 @@
-package br.com.zup.proposta.proposta.config.controller;
+package br.com.zup.proposta.proposta.controller;
 
 import java.net.URI;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,11 +28,20 @@ public class PropostaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> inserir(@RequestBody @Valid PropostaDTO dto, UriComponentsBuilder builder){
+	public ResponseEntity<Proposta> inserir(@RequestBody @Valid PropostaDTO dto, UriComponentsBuilder builder){
 		Proposta proposta = dto.toModel();
+		
+		if(verificarDocumento(dto.getDocumento())) {
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+		}
+		
 		propostaRepository.save(proposta);
 		
 		URI uri = builder.path("/proposta/{id}").build(proposta.getId());
 		return ResponseEntity.created(uri).build();
+	}
+	
+	private boolean verificarDocumento(String documento) {
+		return propostaRepository.findByDocumento(documento).isPresent();
 	}
 }

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -15,7 +14,7 @@ public class PropostaDTO {
 
 	@NotBlank
 	@CPFouCNPJ
-	private String cpfOuCnpj;
+	private String documento;
 
 	@NotBlank
 	@Email
@@ -31,18 +30,17 @@ public class PropostaDTO {
 	@PositiveOrZero
 	private BigDecimal salario;
 
-	public PropostaDTO(@NotEmpty String cpfOuCnpj, @NotEmpty @Email String email, @NotEmpty String nome,
-			@NotEmpty String endereco, @NotNull @PositiveOrZero BigDecimal salario) {
+	public PropostaDTO(String documento, String email, String nome, String endereco, BigDecimal salario) {
 		super();
-		this.cpfOuCnpj = cpfOuCnpj;
+		this.documento = documento;
 		this.email = email;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.salario = salario;
 	}
 
-	public String getCpfOuCnpj() {
-		return cpfOuCnpj;
+	public String getDocumento() {
+		return documento;
 	}
 
 	public String getEmail() {
@@ -62,6 +60,6 @@ public class PropostaDTO {
 	}
 
 	public Proposta toModel() {
-		return new Proposta(cpfOuCnpj, email, nome, endereco, salario);
+		return new Proposta(documento, email, nome, endereco, salario);
 	}
 }

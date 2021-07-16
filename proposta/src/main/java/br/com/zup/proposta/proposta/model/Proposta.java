@@ -21,7 +21,7 @@ public class Proposta {
 
 	@NotBlank
 	@Column(nullable = false)
-	private String cpfOuCnpj;
+	private String documento;
 
 	@NotBlank
 	@Column(nullable = false)
@@ -45,10 +45,9 @@ public class Proposta {
 		super();
 	}
 
-	public Proposta(@NotBlank String cpfOuCnpj, @NotBlank @Email String email, @NotBlank String nome,
-			@NotBlank String endereco, @NotNull @PositiveOrZero BigDecimal salario) {
+	public Proposta(String documento, String email, String nome, String endereco, BigDecimal salario) {
 		super();
-		this.cpfOuCnpj = cpfOuCnpj;
+		this.documento = documento;
 		this.email = email;
 		this.nome = nome;
 		this.endereco = endereco;
