@@ -1,4 +1,4 @@
-package br.com.zup.proposta.proposta.model;
+package br.com.zup.proposta.proposta.dto;
 
 import br.com.zup.proposta.proposta.model.enums.StatusProposta;
 

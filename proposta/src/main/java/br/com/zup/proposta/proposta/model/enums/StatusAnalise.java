@@ -2,16 +2,9 @@ package br.com.zup.proposta.proposta.model.enums;
 
 public enum StatusAnalise {
 
-	COM_RESTRICAO(StatusProposta.NAO_ELEGIVEL), SEM_RESTRICAO(StatusProposta.ELEGIVEL);
+	COM_RESTRICAO, SEM_RESTRICAO;
 
-	private StatusProposta statusProposta;
-
-	StatusAnalise(StatusProposta statusProposta) {
-		this.statusProposta = statusProposta;
+	public StatusProposta retornarStatus() {
+		return this == COM_RESTRICAO ? StatusProposta.NAO_ELEGIVEL : StatusProposta.ELEGIVEL;
 	}
-
-	public StatusProposta getStatusProposta() {
-		return statusProposta;
-	}
-
 }

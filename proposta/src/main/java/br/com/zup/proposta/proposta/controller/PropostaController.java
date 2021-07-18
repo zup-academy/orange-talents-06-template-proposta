@@ -15,10 +15,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.com.zup.proposta.proposta.dto.DadosAnalise;
+import br.com.zup.proposta.proposta.dto.DadosSolicitacao;
 import br.com.zup.proposta.proposta.dto.PropostaDTO;
 import br.com.zup.proposta.proposta.interfaces.SolicitacaoClient;
-import br.com.zup.proposta.proposta.model.DadosAnalise;
-import br.com.zup.proposta.proposta.model.DadosSolicitacao;
 import br.com.zup.proposta.proposta.model.Proposta;
 import br.com.zup.proposta.proposta.model.enums.StatusProposta;
 import br.com.zup.proposta.proposta.repository.PropostaRepository;

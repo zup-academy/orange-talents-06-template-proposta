@@ -1,11 +1,13 @@
-package br.com.zup.proposta.proposta.model;
+package br.com.zup.proposta.proposta.dto;
 
 public class DadosSolicitacao {
 
 	private String documento;
+	
 	private String nome;
+	
 	private Long propostaId;
-
+	
 	public DadosSolicitacao(String documento, String nome, Long propostaId) {
 		super();
 		this.documento = documento;
