@@ -6,18 +6,18 @@ public class DadosAnalise {
 
 	private String documento;
 	private String nome;
-	private Long propostaId;
+	private Long idProposta;
 	private StatusProposta statusProposta;
 
 	public DadosAnalise() {
 		super();
 	}
 
-	public DadosAnalise(String documento, String nome, Long propostaId, StatusProposta statusProposta) {
+	public DadosAnalise(String documento, String nome, Long idProposta, StatusProposta statusProposta) {
 		super();
 		this.documento = documento;
 		this.nome = nome;
-		this.propostaId = propostaId;
+		this.idProposta = idProposta;
 		this.statusProposta = statusProposta;
 	}
 
@@ -29,8 +29,8 @@ public class DadosAnalise {
 		return nome;
 	}
 
-	public Long getPropostaId() {
-		return propostaId;
+	public Long getIdProposta() {
+		return idProposta;
 	}
 
 	public StatusProposta getStatusProposta() {

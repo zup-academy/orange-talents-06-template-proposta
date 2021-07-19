@@ -1,14 +1,16 @@
 package br.com.zup.proposta.proposta.interfaces;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.zup.proposta.proposta.dto.DadosAnalise;
 import br.com.zup.proposta.proposta.dto.DadosSolicitacao;
 
-@FeignClient(name = "client", url = "http://localhost:9999/api/solicitacao")
+@FeignClient(name = "solicitacao", url = "http://localhost:9999")
 public interface SolicitacaoClient {
 
-	@PostMapping
-	DadosAnalise dadosAnalise(DadosSolicitacao dadosSolicitacao);
+	@RequestMapping(method = RequestMethod.POST, value = "/api/solicitacao")
+	DadosAnalise dadosAnalise(@RequestBody DadosSolicitacao dadosSolicitacao);
 }
