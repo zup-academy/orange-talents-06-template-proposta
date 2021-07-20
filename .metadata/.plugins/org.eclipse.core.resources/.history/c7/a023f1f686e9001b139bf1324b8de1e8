@@ -1,0 +1,28 @@
+package com.zup.proposta.response;
+
+public class CartaoResponseNumero {
+	private String id;
+	private String idProposta;
+	
+	
+	public CartaoResponseNumero() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Long getIdProposta() {
+		return idProposta;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public CartaoResponseNumero(Long idProposta, String id) {
+		super();
+		this.idProposta = idProposta;
+		this.id = id;
+	}
+	
+	
+	
+}

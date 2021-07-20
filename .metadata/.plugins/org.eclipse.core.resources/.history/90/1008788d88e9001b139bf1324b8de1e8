@@ -1,0 +1,47 @@
+package com.zup.proposta.response;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties
+public class CartaoResponseNumero {
+	private String id;
+	private String emitidoEm;
+	private String titular;
+	private String idProposta;
+	private String bloqueios;
+	private String avisos;
+	
+	public String getAvisos() {
+		return avisos;
+	}
+
+	public CartaoResponseNumero() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public String getBloqueios() {
+		return bloqueios;
+	}
+	
+	public String getTitular() {
+		return titular;
+	}
+	
+	public String getEmitidoEm() {
+		return emitidoEm;
+	}
+
+	public String getIdProposta() {
+		return idProposta;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public CartaoResponseNumero(String idProposta, String id) {
+		this.idProposta = idProposta;
+		this.id = id;
+	}
+
+}

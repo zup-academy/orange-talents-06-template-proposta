@@ -1,0 +1,5 @@
+CREATE TABLE cartao(
+	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	idProposta BIGINT(20)
+) ENGINE=InnoDB DEFAULT charset=utf8;
+	

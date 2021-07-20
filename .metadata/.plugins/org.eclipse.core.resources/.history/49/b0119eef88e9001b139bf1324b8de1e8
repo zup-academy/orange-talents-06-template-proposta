@@ -1,0 +1,13 @@
+package com.zup.proposta.response;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CartaoResponseNumero {
+	private String id;
+	
+	private String idProposta;
+	
+	
+
+}

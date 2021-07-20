@@ -1,0 +1,17 @@
+package com.zup.proposta.controller;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.zup.proposta.modelo.Cartao;
+import com.zup.proposta.response.CartaoResponseNumero;
+
+@FeignClient(name = "cartoes", url = "http://localhost:8888/api")
+public interface AccountsController {
+
+	@RequestMapping(method = RequestMethod.GET, value = "/cartoes?idProposta={idProposta}")
+	CartaoResponseNumero getNumeroCartao(@PathVariable("idProposta") String idProposta);
+
+}

@@ -1,0 +1,17 @@
+package com.zup.proposta.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.zup.proposta.feignCliente.AccountsController;
+import com.zup.proposta.response.CartaoResponseNumero;
+
+public class AtualizaPropostaNumeroCartao {
+	
+	@Autowired
+	AccountsController accountsController;
+	
+	public void recuperaDadosCartao(String idProposta) {
+		CartaoResponseNumero numeroCartao = accountsController.getNumeroCartao(idProposta);
+	}
+
+}

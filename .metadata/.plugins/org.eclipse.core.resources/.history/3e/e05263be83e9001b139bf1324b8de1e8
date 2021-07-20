@@ -1,0 +1,5 @@
+package com.zup.proposta.response;
+
+public class CartaoResponseNumero {
+
+}

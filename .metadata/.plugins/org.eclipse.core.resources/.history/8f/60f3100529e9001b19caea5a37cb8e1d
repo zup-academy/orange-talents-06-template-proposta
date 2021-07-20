@@ -1,0 +1,15 @@
+CREATE TABLE cartao(
+	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	emitidoEm
+	titular
+	bloqueios
+	avisos
+	
+	
+	
+	documento VARCHAR(14) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+    nome VARCHAR(50) NOT NULL, 
+    endereco VARCHAR(150) NOT NULL,
+    salario float(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT charset=utf8;

@@ -1,0 +1,9 @@
+package com.zup.proposta.controller;
+
+public class AtualizaPropostaNumeroCartao {
+	
+	public void recuperaDadosCartao() {
+		
+	}
+
+}

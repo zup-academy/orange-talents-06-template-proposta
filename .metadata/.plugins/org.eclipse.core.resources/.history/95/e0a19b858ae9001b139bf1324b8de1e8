@@ -1,0 +1,5 @@
+package com.zup.proposta.repository;
+
+public interface CartaoRespository {
+
+}
