@@ -1,0 +1,22 @@
+package com.zup.proposta.validation;
+
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import javax.validation.executable.ExecutableValidator;
+import javax.validation.metadata.BeanDescriptor;
+
+public class ValidacaoValidator implements Validator {
+
+	 @Override
+	    public boolean supports(Class<?> aClass) {
+	        return false;
+	    }
+
+	    @Override
+	    public void validate(Object o, Errors errors) {
+
+	    }
+
+}

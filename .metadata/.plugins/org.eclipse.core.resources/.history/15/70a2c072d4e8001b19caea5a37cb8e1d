@@ -1,0 +1,42 @@
+package com.zup.proposta.request;
+
+import java.math.BigDecimal;
+
+import com.zup.proposta.modelo.Proposta;
+
+public class PropostaRequest {
+	
+	private String documento;
+	private String email;
+    private String nome; 
+    private String endereco;
+    private BigDecimal salario;
+	public String getDocumento() {
+		return documento;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public String getEndereco() {
+		return endereco;
+	}
+	public BigDecimal getSalario() {
+		return salario;
+	}
+	
+	public PropostaRequest(String documento, String email, String nome, String endereco, BigDecimal salario) {
+		this.documento = documento;
+		this.email = email;
+		this.nome = nome;
+		this.endereco = endereco;
+		this.salario = salario;
+	}
+	public Proposta toModel() {
+		return new Proposta(this.documento, this.email, this.nome, this.endereco, this.salario);
+	}
+    
+    
+}

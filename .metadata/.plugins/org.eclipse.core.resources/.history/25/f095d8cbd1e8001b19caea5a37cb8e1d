@@ -1,0 +1,5 @@
+package com.zup.proposta.request;
+
+public class PropostaRequest {
+
+}

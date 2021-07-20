@@ -1,0 +1,5 @@
+package com.zup.proposta.validation;
+
+public class ValorUnicoValidator implements ConstraintValidator<ValorUnico, Object> {
+
+}

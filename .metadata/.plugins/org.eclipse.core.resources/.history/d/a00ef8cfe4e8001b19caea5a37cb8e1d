@@ -1,0 +1,27 @@
+package com.zup.proposta.validation;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class ValidacaoCadastroValidator implements ConstraintValidator<ValorUnico, Object> {
+
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	private Class<?> classe;
+	private String dominio;
+
+	@Override
+	public boolean supports(Class<?> aClass) {
+	    return NovaPropostaRequest.class.equals(aClass);
+	}
+	
+	@Override
+	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

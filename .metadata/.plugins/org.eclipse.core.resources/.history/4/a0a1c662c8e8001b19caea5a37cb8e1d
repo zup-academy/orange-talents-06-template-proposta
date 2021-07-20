@@ -1,0 +1,5 @@
+package com.zup.proposta.controller;
+
+public interface PropostaController {
+
+}

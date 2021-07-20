@@ -1,0 +1,12 @@
+package com.zup.proposta.request;
+
+import java.math.BigDecimal;
+
+public class PropostaRequest {
+	
+	private String documento;
+	private String email;
+    private String nome; 
+    private String endereco;
+    private BigDecimal salario;
+}

@@ -1,0 +1,20 @@
+package com.zup.proposta.modelo;
+
+import java.math.BigDecimal;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Proposta {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	private String documento;
+	private String email;
+    private String nome; 
+    private String endereco;
+    private BigDecimal salario;
+}

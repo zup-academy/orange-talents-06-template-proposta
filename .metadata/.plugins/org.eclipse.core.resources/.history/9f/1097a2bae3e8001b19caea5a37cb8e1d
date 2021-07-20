@@ -1,0 +1,7 @@
+package com.zup.proposta.validation;
+
+import javax.validation.Validator;
+
+public class ValidacaoValidator implements Validator {
+
+}

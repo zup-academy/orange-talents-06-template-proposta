@@ -1,0 +1,8 @@
+package com.zup.proposta.validation;
+
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+@Retention(RUNTIME)
+@Constraint(validatedBy = { ValorUnicoValidator.class })
+public @interface ValorUnico {
+
+}
