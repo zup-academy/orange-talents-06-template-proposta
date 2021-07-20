@@ -61,11 +61,11 @@ public class PropostaController {
 	public ResponseEntity<?> obter(@PathVariable Long id) {
 		Optional<Proposta> proposta = propostaRepository.findById(id);
 
-		if (proposta.isEmpty()) {
-			logger.error("Não existe proposta com esse id");
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		if (proposta.isPresent()) {
+			return ResponseEntity.ok(proposta);
 		}
-		return ResponseEntity.ok(proposta);
+		logger.error("Não existe proposta com esse id");
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
 
 	@Scheduled(fixedDelayString = "5000")

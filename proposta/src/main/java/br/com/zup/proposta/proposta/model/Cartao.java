@@ -62,6 +62,11 @@ public class Cartao {
 	private Set<Parcela> parcelas = new HashSet<>();
 	
 	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "cartao", cascade = CascadeType.MERGE)
+	private Set<Biometria> biometrias = new HashSet<>();
+
+	@NotNull
 	private BigDecimal limite;
 	
 	@Valid
@@ -76,6 +81,7 @@ public class Cartao {
 	@Valid
 	@OneToOne
 	private Proposta idProposta;
+	
 
 	public Cartao() {
 		super();
@@ -146,5 +152,12 @@ public class Cartao {
 	public Proposta getIdProposta() {
 		return idProposta;
 	}
+
+	public Set<Biometria> getBiometrias() {
+		return biometrias;
+	}
 	
+	public void adicionarBiometria(@Valid Biometria biomeria) {
+		this.biometrias.add(biomeria);
+	}
 }
