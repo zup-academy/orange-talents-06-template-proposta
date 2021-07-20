@@ -1,0 +1,5 @@
+package com.zup.proposta.modelo;
+
+public enum EnumStatusDevolulitava {
+
+}

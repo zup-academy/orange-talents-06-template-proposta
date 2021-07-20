@@ -1,0 +1,31 @@
+package com.zup.proposta.feignCliente;
+
+public class Cartao {
+	private String documento;
+	private String nome;
+	private String idProposta;
+	private String resultadoSolicitacao;
+	
+	public String getDocumento() {
+		return documento;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public String getIdProposta() {
+		return idProposta;
+	}
+	public String getResultadoSolicitacao() {
+		return resultadoSolicitacao;
+	}
+	public Cartao(String documento, String nome, String idProposta) {
+		this.documento = documento;
+		this.nome = nome;
+		this.idProposta = idProposta;
+	}
+	public CartaoResponse toConverte() {
+		return new CartaoResponse(documento, nome, idProposta, resultadoSolicitacao);
+	}
+	
+	
+}

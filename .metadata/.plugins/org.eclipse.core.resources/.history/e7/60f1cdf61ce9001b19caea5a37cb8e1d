@@ -1,0 +1,9 @@
+package com.zup.proposta.controller;
+
+public class ValidaPropostaCliente {
+	
+	public void validaDevolutiva() {
+		
+	}
+
+}

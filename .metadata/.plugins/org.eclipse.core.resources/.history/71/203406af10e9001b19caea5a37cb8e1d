@@ -1,0 +1,7 @@
+package com.zup.proposta.feignCliente;
+
+public class Cartao {
+	private String documento;
+	private String nome;
+	private String idProposta;
+}

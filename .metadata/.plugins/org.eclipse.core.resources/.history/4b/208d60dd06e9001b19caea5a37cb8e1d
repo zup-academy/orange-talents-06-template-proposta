@@ -1,0 +1,9 @@
+package com.zup.proposta.feignCliente;
+
+@FeignClient("cartoes")
+public interface CartoesClient {
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/cartoes")
+    List<Cartao> cartoes();
+    
+}

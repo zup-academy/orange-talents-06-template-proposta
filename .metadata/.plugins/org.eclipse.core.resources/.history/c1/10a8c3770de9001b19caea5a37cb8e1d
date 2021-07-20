@@ -1,0 +1,5 @@
+package com.zup.proposta.feignCliente;
+
+public interface Cartao {
+
+}
