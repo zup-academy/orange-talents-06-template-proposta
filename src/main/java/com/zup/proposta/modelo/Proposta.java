@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.zup.proposta.response.PropostaResponse;
+
 @Entity
 public class Proposta {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +63,14 @@ public class Proposta {
 	
 	public void setElegivel(String elegivel) {
 		this.elegivel = elegivel;
+	}
+
+	public PropostaResponse toConverteResponse(String idCartao) {
+		return new PropostaResponse(id, documento, email, nome, elegivel, idCartao);
+	}
+	
+	public PropostaResponse toConverteResponse() {
+		return new PropostaResponse(id, documento, email, nome, elegivel);
 	}
     
 }

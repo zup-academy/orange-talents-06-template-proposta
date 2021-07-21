@@ -6,4 +6,6 @@ import com.zup.proposta.modelo.Cartao;
 
 public interface CartaoRespository extends JpaRepository<Cartao, Long>{
 
+	Cartao findCartaoByIdProposta(Long id);
+
 }
