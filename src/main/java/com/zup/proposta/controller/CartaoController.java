@@ -39,7 +39,6 @@ public class CartaoController {
 	public CartaoResponseNumero recuperaNumeroCartao(@PathVariable String idProposta) {
 
 		CartaoResponseNumero numeroCartao = accountsController.getNumeroCartao(idProposta);
-		
 
 		System.out.println(numeroCartao);
 		return numeroCartao;
