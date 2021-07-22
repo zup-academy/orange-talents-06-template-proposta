@@ -1,4 +1,4 @@
-package com.zup.proposta.controller;
+package com.zup.proposta.controller.validation;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +23,16 @@ public class CriaProposta {
 	private String status;
 
 	public Proposta constroiProposta(PropostaRequest request) {
-
 		Proposta propostaRequest = request.toModel();
 		Proposta proposta = propostaRepository.save(propostaRequest);
-
 		status = validaPropostaCliente.validaDevolutiva(proposta);
-		Proposta atualizaProposta = atualizaProposta(proposta);
 		
-		atualizaPropostaNumeroCartao.validaStatusProposta(atualizaProposta);
+		Proposta atualizaProposta = atualizaProposta(proposta);
+		if(status.equals("ELEGIVEL")) {
+			atualizaPropostaNumeroCartao.validaStatusProposta(atualizaProposta);
+		}
+			
+				
 		return atualizaProposta;
 	}
 
@@ -38,7 +40,6 @@ public class CriaProposta {
 		Proposta atualizaProposta = propostaRepository.getById(proposta.getId());
 		atualizaProposta.setElegivel(status);
 		BeanUtils.copyProperties(proposta, atualizaProposta);
-
 		atualizaProposta = propostaRepository.save(atualizaProposta);
 		return atualizaProposta;
 	}

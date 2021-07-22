@@ -14,6 +14,8 @@ import com.zup.proposta.feignCliente.CartaoSolicitacao;
 import com.zup.proposta.feignCliente.CartoesClient;
 import com.zup.proposta.response.CartaoResponseNumero;
 
+import feign.FeignException;
+
 @RestController
 @RequestMapping("/cartoes")
 public class CartaoController {
@@ -28,19 +30,18 @@ public class CartaoController {
 
 	@PostMapping
 	public String validaCartao(@RequestBody CartaoSolicitacao request) {
-		CartaoResponse responseCartao = cartaoCliente.getSolicitacao(request);
-		statusDevolutiva = responseCartao.getResultadoSolicitacao();
-		System.out.println(responseCartao.getResultadoSolicitacao());
-		// return ResponseEntity.ok(responseCartao);
+		try {
+			CartaoResponse responseCartao = cartaoCliente.getSolicitacao(request);
+			statusDevolutiva = responseCartao.getResultadoSolicitacao();
+		}catch (FeignException e) {
+			statusDevolutiva = "COM_RESTRICAO";
+		}
 		return statusDevolutiva;
 	}
 
 	@GetMapping("/{idProposta}")
 	public CartaoResponseNumero recuperaNumeroCartao(@PathVariable String idProposta) {
-
 		CartaoResponseNumero numeroCartao = accountsController.getNumeroCartao(idProposta);
-
-		System.out.println(numeroCartao);
 		return numeroCartao;
 	}
 
