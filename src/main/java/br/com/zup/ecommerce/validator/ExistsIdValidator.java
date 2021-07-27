@@ -1,4 +1,4 @@
-package com.zup.proposta.validation;
+package br.com.zup.ecommerce.validator;
 
 import java.util.List;
 
@@ -8,28 +8,27 @@ import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class ValorUnicoValidator implements ConstraintValidator<ValorUnico, Object> {
+public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	
 	private Class<?> classe;
 	private String dominio;
 
 	@Override
-	public void initialize(ValorUnico constraintAnnotation) {
+	public void initialize(ExistsId constraintAnnotation) {
 		dominio = constraintAnnotation.fieldName();
 		classe = constraintAnnotation.domainClass();
 	}
 
+	
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
 		Query query = entityManager.createQuery("select 1 from " + classe.getName() + " where " + dominio + "=:value");
 		query.setParameter("value", value);
 		List<?> list = query.getResultList();
-		boolean lista = list.isEmpty();
-		
-		return lista;
+		return !list.isEmpty();
 	}
 
 }

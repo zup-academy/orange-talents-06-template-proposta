@@ -32,28 +32,31 @@ public class PropostaExceptionHandler extends ResponseEntityExceptionHandler {
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, headers, status, request);
 	}
-	
+
 	/*
 	 * protected ResponseEntity<Object>
-	 * handleHttpMessageNotBlank(MethodArgumentNotValidException ex, HttpHeaders
+	 * handleHttpMessageNotUnique(MethodArgumentNotValidException ex, HttpHeaders
 	 * headers, HttpStatus status, WebRequest request) { String mensagemUsuario =
 	 * messageSource.getMessage("mensagem.invalida", null,
 	 * LocaleContextHolder.getLocale()); String mensagemDesenvolvedor =
 	 * ex.getCause().toString(); List<Erro> erros = Arrays.asList(new
 	 * Erro(mensagemUsuario, mensagemDesenvolvedor)); return
-	 * handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
-	 * }
+	 * handleExceptionInternal(ex, erros, headers, HttpStatus.UNPROCESSABLE_ENTITY,
+	 * request); }
 	 */
 
-	
-	  @Override protected ResponseEntity<Object>
-	  handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders
-	  headers, HttpStatus status, WebRequest request) {
-	  
-	  List<Erro> erros = criarListaDeErros(ex.getBindingResult()); return
-	  handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST,
-	  request); }
-	 
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		
+		List<Erro> erros = criarListaDeErros(ex.getBindingResult());
+		//System.err.println(ex.getBindingResult().getFieldError().getField());
+		if (ex.getBindingResult().getFieldError().getField().matches("documento")) {
+			return handleExceptionInternal(ex, erros, headers, HttpStatus.UNPROCESSABLE_ENTITY, request);
+		}
+		
+		else return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
+	}
 
 	private List<Erro> criarListaDeErros(BindingResult bindingResult) {
 		List<Erro> erros = new ArrayList<>();
@@ -68,6 +71,7 @@ public class PropostaExceptionHandler extends ResponseEntityExceptionHandler {
 	public static class Erro {
 		private String mensagemUsuario;
 		private String mensagemDesenvolvedor;
+		
 
 		public Erro(String mensagemUsuario, String mensagemDesenvolvedor) {
 			this.mensagemUsuario = mensagemUsuario;

@@ -11,17 +11,19 @@ import com.zup.proposta.response.PropostaResponse;
 
 @Entity
 public class Proposta {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String documento;
 	private String email;
-    private String nome; 
-    private String endereco;
-    private BigDecimal salario;
-    private String elegivel;
-    
-    public Proposta() {
+	private String nome;
+	private String endereco;
+	private BigDecimal salario;
+	private String elegivel;
+	private String cartao;
+
+	public Proposta() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -31,7 +33,11 @@ public class Proposta {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.salario = salario;
-		
+
+	}
+
+	public String getCartao() {
+		return cartao;
 	}
 
 	public Long getId() {
@@ -57,21 +63,21 @@ public class Proposta {
 	public BigDecimal getSalario() {
 		return salario;
 	}
-    
+
 	public String getElegivel() {
 		return elegivel;
 	}
-	
+
 	public void setElegivel(String elegivel) {
 		this.elegivel = elegivel;
 	}
 
-	public PropostaResponse toConverteResponse(String idCartao) {
-		return new PropostaResponse(id, documento, email, nome, elegivel, idCartao);
-	}
-	
 	public PropostaResponse toConverteResponse() {
-		return new PropostaResponse(id, documento, email, nome, elegivel);
+		return new PropostaResponse(id, documento, email, nome, elegivel, cartao);
 	}
-    
+
+	public void setCartao(String cartao) {
+		this.cartao = cartao;
+	}
+
 }

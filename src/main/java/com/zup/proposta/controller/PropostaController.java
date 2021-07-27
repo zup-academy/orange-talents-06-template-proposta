@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.zup.proposta.controller.validation.CriaProposta;
-import com.zup.proposta.modelo.Cartao;
 import com.zup.proposta.modelo.Proposta;
-import com.zup.proposta.repository.CartaoRespository;
 import com.zup.proposta.repository.PropostaRepository;
 import com.zup.proposta.request.PropostaRequest;
 import com.zup.proposta.response.PropostaResponse;
@@ -31,14 +29,11 @@ public class PropostaController {
 
 	@Autowired
 	private PropostaRepository propostaRepository;
-	
-	@Autowired
-	private CartaoRespository cartaoRespository;
 
 	@Autowired
 	private CriaProposta criaProposta;
-	
-	private PropostaResponse responseProposta;
+
+
 
 	@GetMapping
 	public List<Proposta> listar() {
@@ -46,26 +41,25 @@ public class PropostaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Proposta> novaProposta(@Valid @RequestBody PropostaRequest request,
+	public ResponseEntity<PropostaResponse> novaProposta(@Valid @RequestBody PropostaRequest request,
 			HttpServletResponse response) {
-		
-		Proposta proposta = criaProposta.constroiProposta(request);
 
+		Proposta proposta = criaProposta.constroiProposta(request);
+		System.out.println(proposta.getCartao());
+		PropostaResponse PropostaResponse = proposta.toConverteResponse();
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(proposta.getId())
 				.toUri();
-		return ResponseEntity.created(uri).body(proposta);
+		return ResponseEntity.created(uri).body(PropostaResponse);
+
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<PropostaResponse> buscarPeloCodigo(@PathVariable Long id) { 
+	public ResponseEntity<PropostaResponse> buscarPeloCodigo(@PathVariable Long id) {
 		Optional<Proposta> propostaRecuperado = propostaRepository.findById(id);
-		if(propostaRecuperado.isPresent()) {
+		if (propostaRecuperado.isPresent()) {
 			Proposta proposta = propostaRecuperado.get();
-			
-			Cartao recuperaCartao = cartaoRespository.findCartaoByIdProposta(proposta.getId());
-			if(recuperaCartao == null) responseProposta = proposta.toConverteResponse();
-			else  responseProposta = proposta.toConverteResponse(recuperaCartao.getIdCartao());
-			return ResponseEntity.ok(responseProposta);
+			PropostaResponse PropostaResponse = proposta.toConverteResponse();
+			return ResponseEntity.ok(PropostaResponse);
 		}
 		return ResponseEntity.notFound().build();
 	}

@@ -1,7 +1,6 @@
 package com.zup.proposta.modelo;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,39 +16,38 @@ public class Biometria {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_cartao")
-	private Cartao cartao;
+	@JoinColumn(name = "codigo_proposta")
+	private Proposta proposta;
 
 	private String biometria;
 	private LocalDateTime criacao;
 
+	public Biometria() {
+		// TODO Auto-generated constructor stub
+	}
 
-	public Biometria(Cartao cartao, String biometria) {
-		this.cartao = cartao;
+	public Biometria(Proposta proposta, String biometria) {
+		this.proposta = proposta;
 		this.biometria = biometria;
 		this.criacao = LocalDateTime.now();
-	}
-	
-	
-	
-	public LocalDateTime getCriacao() {
-		return criacao;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public Cartao getCartao() {
-		return cartao;
+	public Proposta getProposta() {
+		return proposta;
 	}
 
 	public String getBiometria() {
 		return biometria;
 	}
-	
-	
-	
+
+	public LocalDateTime getCriacao() {
+		return criacao;
+	}
+
 	
 
 }

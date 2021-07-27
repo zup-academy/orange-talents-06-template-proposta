@@ -8,20 +8,18 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE_USE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = { ValorUnicoValidator.class })
-public @interface ValorUnico {
+@Documented
+@Constraint(validatedBy = { ExistsIdValidator.class })
+public @interface ExistsId {
 	String message() default "";
 
 	Class<?>[] groups() default { };
@@ -31,5 +29,4 @@ public @interface ValorUnico {
 	Class<?> domainClass();
 	
 	String fieldName();
-	
 }

@@ -16,9 +16,6 @@ public class CriaProposta {
 
 	@Autowired
 	private ValidaPropostaCliente validaPropostaCliente;
-	
-	@Autowired
-	private AtualizaPropostaNumeroCartao atualizaPropostaNumeroCartao;
 
 	private String status;
 
@@ -26,13 +23,7 @@ public class CriaProposta {
 		Proposta propostaRequest = request.toModel();
 		Proposta proposta = propostaRepository.save(propostaRequest);
 		status = validaPropostaCliente.validaDevolutiva(proposta);
-		
 		Proposta atualizaProposta = atualizaProposta(proposta);
-		if(status.equals("ELEGIVEL")) {
-			atualizaPropostaNumeroCartao.validaStatusProposta(atualizaProposta);
-		}
-			
-				
 		return atualizaProposta;
 	}
 
@@ -43,7 +34,5 @@ public class CriaProposta {
 		atualizaProposta = propostaRepository.save(atualizaProposta);
 		return atualizaProposta;
 	}
-	
-	
 
 }
