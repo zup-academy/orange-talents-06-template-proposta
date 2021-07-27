@@ -1,7 +1,10 @@
 package com.zup.proposta.feignCliente.response;
 
+import javax.validation.constraints.NotBlank;
+
 public class CartaoBloqueio {
 	
+	@NotBlank
 	private String sistemaResponsavel;
 	
 	public String getSistemaResponsavel() {

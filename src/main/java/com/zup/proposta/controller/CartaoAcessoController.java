@@ -1,7 +1,9 @@
 package com.zup.proposta.controller;
 
 import java.net.URI;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -15,10 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.zup.proposta.controller.validation.AtualizaBloqueio;
-import com.zup.proposta.controller.validation.AtualizaProposta;
 import com.zup.proposta.controller.validation.RecuperaPropostaBiometria;
 import com.zup.proposta.feignCliente.response.CartaoBloqueio;
+import com.zup.proposta.modelo.Bloqueio;
 import com.zup.proposta.modelo.Proposta;
+import com.zup.proposta.response.BloqueioResponse;
 
 @RestController
 @RequestMapping("/cartoes")
@@ -29,28 +32,53 @@ public class CartaoAcessoController {
 
 	@Autowired
 	private AtualizaBloqueio atualizaBloqueio;
-	
-	
 
 	@PostMapping("/{idCartao}")
 	public ResponseEntity<?> cadastrar(@PathVariable String idCartao, @RequestBody @Valid CartaoBloqueio bloqueio,
-			HttpServletResponse response) {
-		try {
-			Proposta proposta = recuperaPropostaBiometria.recuperaProposta(idCartao);
-			if (!proposta.getStatus().equals("BLOQUEADO")) {
-				
-				atualizaBloqueio.insereDadosBloqueio(proposta, bloqueio);
-				
-			}
-
+			HttpServletResponse response, HttpServletRequest request) {
+		
+		
+		Proposta proposta = recuperaPropostaBiometria.recuperaProposta(idCartao);
+		if (proposta != null) {
+			
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(proposta.getId())
 					.toUri();
-			return ResponseEntity.created(uri).body(proposta);
+			response.setHeader("Location", uri.toASCIIString());
 
-		} catch (Exception e) {
-			return ResponseEntity.notFound().build();
+			if (proposta.getStatus() == null) {
+
+				Bloqueio bloqueioSalvo = atualizaBloqueio.insereDadosBloqueio(proposta, bloqueio, getId(request));
+				BloqueioResponse bloqueioResponse = bloqueioSalvo.toResponse();
+				if (bloqueioSalvo.getProposta().getStatus().equals("FALHA")) {
+					return ResponseEntity.badRequest().body(bloqueioResponse);
+				}
+				return ResponseEntity.ok().body(bloqueioSalvo);
+			}
+
+			if (proposta.getStatus().equals("BLOQUEADO")) {
+				return ResponseEntity.unprocessableEntity().body(proposta);
+			}
+			if (proposta.getStatus().equals("FALHA")) {
+				return ResponseEntity.accepted().body(proposta);
+			}
+
 		}
 
+		return ResponseEntity.notFound().build();
+
 	}
+	
+	private String getId(HttpServletRequest request) {
+		String ipAddress = request.getHeader("x-forwarded-for");
+		if (ipAddress == null) {
+		    ipAddress = request.getHeader("X_FORWARDED_FOR");
+		    if (ipAddress == null){
+		        ipAddress = request.getRemoteAddr();
+		    }
+		}
+		return ipAddress;
+	}
+	
+	
 
 }

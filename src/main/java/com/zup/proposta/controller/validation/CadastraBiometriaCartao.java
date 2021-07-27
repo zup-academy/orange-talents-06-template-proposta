@@ -16,6 +16,7 @@ public class CadastraBiometriaCartao {
 	private BiometriaRepository biometriaRepository;
 
 	public Biometria cadastraBiometria(BiometriaRequest request, Proposta proposta) {
+		
 		String briometriaEncode = encriptografarBiometria(request.getBiometria());
 		Biometria biometria = request.toModel(proposta, briometriaEncode);
 		Biometria biometriaSalva = biometriaRepository.save(biometria);

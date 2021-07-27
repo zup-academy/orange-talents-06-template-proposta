@@ -1,5 +1,8 @@
 package com.zup.proposta.controller.validation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,12 +23,25 @@ public class AtualizaBloqueio {
 	@Autowired
 	private BloqueioRepository bloqueiRepository;
 	
-	public Bloqueio insereDadosBloqueio(Proposta proposta, CartaoBloqueio bloqueio) {
+	public Bloqueio insereDadosBloqueio(Proposta proposta, CartaoBloqueio bloqueio, String ip) {
+		System.out.println("ip"+ip);
 		String status = cartaoController.recuperaStatusBloqueio(proposta.getCartao(), bloqueio);
-		System.err.println(status);
 		atualizaProposta.AtualizaPropostaStatus(status, proposta);
-		Bloqueio bloqueioModel = new Bloqueio(proposta);
+		Bloqueio bloqueioModel = new Bloqueio(proposta, ip);
 		bloqueiRepository.save(bloqueioModel);
 		return bloqueioModel;
+	}
+	
+	public List<Bloqueio> recuperaDadosBloqueio(Proposta proposta) {
+		List<Bloqueio> bloqueioProposta = new ArrayList<>();
+		List<Bloqueio> bloqueioRecuperado = bloqueiRepository.findAll();
+		for (Bloqueio bloqueio : bloqueioRecuperado) {
+			if(bloqueio.getProposta().equals(proposta.getId())) {
+				bloqueioProposta.add(bloqueio);
+			}
+		}
+		if (bloqueioProposta.isEmpty()) return null;
+		
+		return bloqueioRecuperado;
 	}
 }

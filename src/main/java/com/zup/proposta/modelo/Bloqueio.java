@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.zup.proposta.response.BloqueioResponse;
+
 @Entity
 public class Bloqueio {
 	
@@ -27,13 +29,8 @@ public class Bloqueio {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Bloqueio(Proposta proposta) {
-		Proposta = proposta;
-		this.criacao = LocalDateTime.now();
-	}
-
 	public Bloqueio(Proposta proposta, String iP) {
-		super();
+
 		Proposta = proposta;
 		this.iP = iP;
 		this.criacao = LocalDateTime.now();
@@ -53,6 +50,10 @@ public class Bloqueio {
 
 	public LocalDateTime getCriacao() {
 		return criacao;
+	}
+
+	public BloqueioResponse toResponse() {
+		return new BloqueioResponse(getProposta(), getCriacao(), getId());
 	}
 	
 	

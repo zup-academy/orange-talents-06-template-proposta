@@ -3,9 +3,14 @@ package com.zup.proposta.feignCliente.response;
 public class CartaoBloqueioResponse {
 	
 	private String resultado;
+	private String id;
 	
 	public String getResultado() {
 		return resultado;
+	}
+	
+	public String getId() {
+		return id;
 	}
 	
 	public CartaoBloqueioResponse() {
@@ -13,7 +18,7 @@ public class CartaoBloqueioResponse {
 	}
 
 	public CartaoBloqueioResponse(String resultado) {
-		super();
+		
 		this.resultado = resultado;
 	}
 	

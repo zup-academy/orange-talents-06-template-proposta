@@ -33,8 +33,6 @@ public class PropostaController {
 	@Autowired
 	private CriaProposta criaProposta;
 
-
-
 	@GetMapping
 	public List<Proposta> listar() {
 		return propostaRepository.findAll();
@@ -45,7 +43,7 @@ public class PropostaController {
 			HttpServletResponse response) {
 
 		Proposta proposta = criaProposta.constroiProposta(request);
-		System.out.println(proposta.getCartao());
+
 		PropostaResponse PropostaResponse = proposta.toConverteResponse();
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(proposta.getId())
 				.toUri();
