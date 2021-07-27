@@ -7,7 +7,7 @@ public class PropostaResponse {
 	private String email;
 	private String nome;
 	private String elegivel;
-	private String idCartao = "Cartão não associado";
+	private String idCartao;
 
 	public PropostaResponse() {
 		// TODO Auto-generated constructor stub
@@ -20,21 +20,14 @@ public class PropostaResponse {
 		this.email = email;
 		this.nome = nome;
 		this.elegivel = elegivel;
-		this.idCartao = idCartao;
+		this.idCartao = validaCartao(idCartao);
 	}
 	
-	public PropostaResponse(Long id, String documento, String email, String nome, String elegivel) {
-
-		this.id = id;
-		this.documento = documento;
-		this.email = email;
-		this.nome = nome;
-		this.elegivel = elegivel;
-		
+	private String validaCartao(String idCartao) {
+		if(idCartao==null) return  "Cartão não associado";
+		else return idCartao;
 	}
-
 	
-
 	public Long getId() {
 		return id;
 	}
