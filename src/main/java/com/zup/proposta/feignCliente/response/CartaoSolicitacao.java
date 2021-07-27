@@ -1,4 +1,4 @@
-package com.zup.proposta.feignCliente;
+package com.zup.proposta.feignCliente.response;
 
 public class CartaoSolicitacao {
 	private String documento;

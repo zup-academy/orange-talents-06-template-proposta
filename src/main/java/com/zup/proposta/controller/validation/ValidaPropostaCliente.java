@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.zup.proposta.controller.CartaoController;
-import com.zup.proposta.feignCliente.CartaoSolicitacao;
+import com.zup.proposta.feignCliente.response.CartaoSolicitacao;
 import com.zup.proposta.modelo.Proposta;
 
 @Component

@@ -1,11 +1,26 @@
-package com.zup.proposta.feignCliente;
+package com.zup.proposta.feignCliente.response;
 
 public class CartaoResponse {
+	private String resultado;
+	
 	private String documento;
 	private String nome;
 	private String idProposta;
 	private String resultadoSolicitacao;
 	
+	public String getResultado() {
+		return resultado;
+	}
+	
+	
+	
+	public CartaoResponse(String resultado) {
+		super();
+		this.resultado = resultado;
+	}
+
+
+
 	public String getDocumento() {
 		return documento;
 	}

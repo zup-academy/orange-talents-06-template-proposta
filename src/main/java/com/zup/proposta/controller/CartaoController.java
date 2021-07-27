@@ -5,19 +5,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zup.proposta.controller.validation.AtualizaPropostaNumeroCartao;
+import com.zup.proposta.controller.validation.AtualizaProposta;
 import com.zup.proposta.feignCliente.AccountsController;
-import com.zup.proposta.feignCliente.CartaoResponse;
-import com.zup.proposta.feignCliente.CartaoSolicitacao;
 import com.zup.proposta.feignCliente.CartoesClient;
+import com.zup.proposta.feignCliente.response.CartaoBloqueio;
+import com.zup.proposta.feignCliente.response.CartaoBloqueioResponse;
+import com.zup.proposta.feignCliente.response.CartaoResponse;
+import com.zup.proposta.feignCliente.response.CartaoSolicitacao;
+import com.zup.proposta.response.BloqueioResponse;
+import com.zup.proposta.response.CartaoResponseBloqueio;
 import com.zup.proposta.response.CartaoResponseNumero;
 
 import feign.FeignException;
 
 @RestController
-
 public class CartaoController {
 
 	@Autowired
@@ -25,9 +29,6 @@ public class CartaoController {
 
 	@Autowired
 	AccountsController accountsController;
-
-	@Autowired
-	private AtualizaPropostaNumeroCartao atualizaProposta;
 
 	private String statusDevolutiva;
 
@@ -46,6 +47,18 @@ public class CartaoController {
 	public CartaoResponseNumero recuperaNumeroCartao(@PathVariable String idProposta) {
 		CartaoResponseNumero numeroCartao = accountsController.getNumeroCartao(idProposta);
 		return numeroCartao;
+
+	}
+	
+	@PostMapping("/{idCartao}")
+	public String recuperaStatusBloqueio(@PathVariable String idCartao, @RequestBody CartaoBloqueio bloqueio) {
+		try {
+			CartaoBloqueioResponse bloqueioResponse = accountsController.postBloqueioCartao(idCartao, bloqueio);
+			statusDevolutiva = bloqueioResponse.getResultado();
+		} catch (FeignException e) {
+			statusDevolutiva = "FALHA";
+		}
+		return statusDevolutiva;
 
 	}
 

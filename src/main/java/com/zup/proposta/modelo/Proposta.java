@@ -22,6 +22,7 @@ public class Proposta {
 	private BigDecimal salario;
 	private String elegivel;
 	private String cartao;
+	private String status;
 
 	public Proposta() {
 		// TODO Auto-generated constructor stub
@@ -34,6 +35,14 @@ public class Proposta {
 		this.endereco = endereco;
 		this.salario = salario;
 
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getCartao() {

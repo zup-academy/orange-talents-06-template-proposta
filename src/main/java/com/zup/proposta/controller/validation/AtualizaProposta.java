@@ -14,7 +14,7 @@ import com.zup.proposta.repository.PropostaRepository;
 import com.zup.proposta.response.CartaoResponseNumero;
 
 @Component
-public class AtualizaPropostaNumeroCartao {
+public class AtualizaProposta {
 	
 	@Autowired
 	private CartaoController cartaoController;
@@ -24,8 +24,8 @@ public class AtualizaPropostaNumeroCartao {
 	
 		
 
-	@Scheduled(fixedDelay = 100000) 
-	public void consultaDadosCartao() {
+	//@Scheduled(fixedDelay = 10000) 
+	private void AtualizaPropostaDadosCartao() {
 		List<Proposta> listaPropostasElegiveis = propostaRepository.findPropostaByElegivelAndCartao("ELEGIVEL",null);
 		if(!listaPropostasElegiveis.isEmpty()) {
 			for (Proposta proposta : listaPropostasElegiveis) {
@@ -39,6 +39,15 @@ public class AtualizaPropostaNumeroCartao {
 		}
 	
 	}
+	
+	
+	public void AtualizaPropostaStatus(String status, Proposta proposta) {
+		Proposta atualProposta = proposta;
+		proposta.setStatus(status);
+		BeanUtils.copyProperties(proposta, atualProposta);
+		propostaRepository.save(atualProposta);
+	}
+	
 	
 	private void atualizaProposta(String cartaoresponse, Proposta proposta) {
 		Proposta atualProposta = proposta;
