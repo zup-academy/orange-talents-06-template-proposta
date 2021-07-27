@@ -56,7 +56,7 @@ public class CartaoController {
 			CartaoBloqueioResponse bloqueioResponse = accountsController.postBloqueioCartao(idCartao, bloqueio);
 			statusDevolutiva = bloqueioResponse.getResultado();
 		} catch (FeignException e) {
-			statusDevolutiva = "FALHA";
+			statusDevolutiva = null;
 		}
 		return statusDevolutiva;
 
