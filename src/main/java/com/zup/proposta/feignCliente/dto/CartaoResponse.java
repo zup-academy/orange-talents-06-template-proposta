@@ -1,4 +1,4 @@
-package com.zup.proposta.feignCliente.response;
+package com.zup.proposta.feignCliente.dto;
 
 public class CartaoResponse {
 	private String resultado;

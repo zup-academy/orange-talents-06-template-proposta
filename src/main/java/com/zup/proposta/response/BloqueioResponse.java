@@ -2,7 +2,6 @@ package com.zup.proposta.response;
 
 import java.time.LocalDateTime;
 
-import com.zup.proposta.modelo.Bloqueio;
 import com.zup.proposta.modelo.Proposta;
 
 public class BloqueioResponse {

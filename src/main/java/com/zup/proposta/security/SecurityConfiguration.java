@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+	//necessário retirar inicio
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
 			.and().csrf().disable();
-		
+		//necessário retirar fim	
 		
 		/*
 		 * http.authorizeRequests(authorizeRequests -> authorizeRequests
@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		 */
 
 	}
-
+	//necessário retirar inicio
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

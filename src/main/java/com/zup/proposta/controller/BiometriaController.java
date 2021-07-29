@@ -26,7 +26,7 @@ import com.zup.proposta.request.BiometriaRequest;
 @RequestMapping("/biometrias")
 public class BiometriaController {
 
-	@Autowired
+	@Autowired(required=true)
 	private BiometriaRepository biometriaRepository;
 
 	@Autowired

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.zup.proposta.controller.CartaoController;
@@ -21,8 +20,8 @@ public class AtualizaProposta {
 	@Autowired
 	private PropostaRepository propostaRepository;
 
-	@Scheduled(fixedDelay = 50000)
-	private void AtualizaPropostaDadosCartao() {
+	//@Scheduled(fixedDelay = 10000)
+	public void AtualizaPropostaDadosCartao() {
 		List<Proposta> listaPropostasElegiveis = propostaRepository.findPropostaByElegivelAndCartao("ELEGIVEL", null);
 		if (!listaPropostasElegiveis.isEmpty()) {
 			for (Proposta proposta : listaPropostasElegiveis) {

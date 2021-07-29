@@ -5,8 +5,6 @@ import javax.validation.constraints.NotBlank;
 import com.zup.proposta.modelo.Biometria;
 import com.zup.proposta.modelo.Proposta;
 
-import br.com.zup.ecommerce.validator.ExistsId;
-
 public class BiometriaRequest {
 
 	@NotBlank

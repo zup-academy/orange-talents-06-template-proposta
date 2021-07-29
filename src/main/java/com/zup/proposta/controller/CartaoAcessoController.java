@@ -1,7 +1,6 @@
 package com.zup.proposta.controller;
 
 import java.net.URI;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.zup.proposta.controller.validation.AtualizaBloqueio;
 import com.zup.proposta.controller.validation.RecuperaPropostaBiometria;
-import com.zup.proposta.feignCliente.response.CartaoBloqueio;
+import com.zup.proposta.feignCliente.dto.CartaoBloqueio;
 import com.zup.proposta.modelo.Bloqueio;
 import com.zup.proposta.modelo.Proposta;
 import com.zup.proposta.response.BloqueioResponse;
