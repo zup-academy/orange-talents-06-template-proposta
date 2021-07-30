@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,13 +70,13 @@ public class CartaoAcessoController {
 	}
 	
 	private String getId(HttpServletRequest request) {
-		String ipAddress = request.getHeader("x-forwarded-for");
-		if (ipAddress == null) {
-		    ipAddress = request.getHeader("X_FORWARDED_FOR");
-		    if (ipAddress == null){
-		        ipAddress = request.getRemoteAddr();
-		    }
-		}
+		
+		
+		  
+		  String ipAddress = request.getHeader("x-forwarded-for"); if (ipAddress ==
+		  null) { ipAddress = request.getHeader("X_FORWARDED_FOR"); if (ipAddress ==
+		  null){ ipAddress = request.getRemoteAddr(); } }
+		 
 		return ipAddress;
 	}
 	

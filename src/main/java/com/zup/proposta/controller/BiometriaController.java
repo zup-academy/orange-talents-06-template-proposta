@@ -25,10 +25,10 @@ import com.zup.proposta.request.BiometriaRequest;
 @RestController
 @RequestMapping("/biometrias")
 public class BiometriaController {
-
-	@Autowired(required=true)
+	
+	@Autowired(required = true)
 	private BiometriaRepository biometriaRepository;
-
+	
 	@Autowired
 	private CadastraBiometriaCartao cadastraBiometriaCartao;
 

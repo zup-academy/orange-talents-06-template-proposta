@@ -8,7 +8,6 @@ import javax.validation.constraints.Positive;
 
 import com.sun.istack.NotNull;
 import com.zup.proposta.modelo.Proposta;
-import com.zup.proposta.validation.CpfCnpj;
 import com.zup.proposta.validation.ValorUnico;
 
 public class PropostaRequest {

@@ -24,7 +24,7 @@ public class AtualizaBloqueio {
 	private BloqueioRepository bloqueiRepository;
 	
 	public Bloqueio insereDadosBloqueio(Proposta proposta, CartaoBloqueio bloqueio, String ip) {
-		System.out.println("ip"+ip);
+
 		String status = cartaoController.recuperaStatusBloqueio(proposta.getCartao(), bloqueio);
 		atualizaProposta.AtualizaPropostaStatus(status, proposta);
 		Bloqueio bloqueioModel = new Bloqueio(proposta, ip);

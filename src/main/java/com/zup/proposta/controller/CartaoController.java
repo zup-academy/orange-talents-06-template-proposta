@@ -13,6 +13,7 @@ import com.zup.proposta.feignCliente.dto.CartaoBloqueio;
 import com.zup.proposta.feignCliente.dto.CartaoBloqueioResponse;
 import com.zup.proposta.feignCliente.dto.CartaoResponse;
 import com.zup.proposta.feignCliente.dto.CartaoSolicitacao;
+import com.zup.proposta.modelo.ViagemRequest;
 import com.zup.proposta.response.CartaoResponseNumero;
 
 import feign.FeignException;
@@ -45,7 +46,7 @@ public class CartaoController {
 		return numeroCartao;
 
 	}
-
+	
 	@PostMapping("/{idCartao}")
 	public String recuperaStatusBloqueio(@PathVariable String idCartao, @RequestBody CartaoBloqueio bloqueio) {
 		try {
@@ -57,5 +58,7 @@ public class CartaoController {
 		return statusDevolutiva;
 
 	}
+	
+	
 
 }
